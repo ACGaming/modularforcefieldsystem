@@ -261,7 +261,7 @@ public class TileEntityExtractor extends TileEntityFEPoweredMachine implements
 				}
 
 				if (getStackInSlot(0).getItem() == ModItems.FORCICIUM_CELL) {
-					if (((ItemForcicumCell) getStackInSlot(0).getItem())
+					if (((ItemForciciumCell) getStackInSlot(0).getItem())
 							.useForcecium(1, getStackInSlot(0))) {
 						setMaxworkcylce(ModularForceFieldSystem.ForciciumCellWorkCycle);
 						setWorkCylce(getMaxworkcylce());
@@ -393,15 +393,15 @@ public class TileEntityExtractor extends TileEntityFEPoweredMachine implements
 							/ getMaxWorkEnergy())
 						setWorkdone(getWorkEnergy() * 100 / getMaxWorkEnergy());
 
-					if (((ItemForcicumCell) getStackInSlot(4).getItem())
-							.getForceciumlevel(getStackInSlot(4)) < ((ItemForcicumCell) getStackInSlot(
+					if (((ItemForciciumCell) getStackInSlot(4).getItem())
+							.getForceciumlevel(getStackInSlot(4)) < ((ItemForciciumCell) getStackInSlot(
 							4).getItem()).getMaxForceciumlevel()) {
 
 						if (this.hasPowertoConvert() && isActive()) {
-							((ItemForcicumCell) getStackInSlot(4).getItem())
+							((ItemForciciumCell) getStackInSlot(4).getItem())
 									.setForceciumlevel(
 											getStackInSlot(4),
-											((ItemForcicumCell) getStackInSlot(
+											((ItemForciciumCell) getStackInSlot(
 													4).getItem())
 													.getForceciumlevel(getStackInSlot(4)) + 1);
 						}
@@ -483,7 +483,7 @@ public class TileEntityExtractor extends TileEntityFEPoweredMachine implements
 		switch (Slot) {
 		case 0:
 			if ((par1ItemStack.getItem() instanceof ItemForcicium || par1ItemStack
-					.getItem() instanceof ItemForcicumCell)
+					.getItem() instanceof ItemForciciumCell)
 					&& getStackInSlot(4).isEmpty())
 				return true;
 			break;
@@ -504,7 +504,7 @@ public class TileEntityExtractor extends TileEntityFEPoweredMachine implements
 			break;
 
 		case 4:
-			if (par1ItemStack.getItem() instanceof ItemForcicumCell
+			if (par1ItemStack.getItem() instanceof ItemForciciumCell
 					&& getStackInSlot(0).isEmpty())
 				return true;
 			break;

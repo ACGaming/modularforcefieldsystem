@@ -31,7 +31,7 @@ public class ModItems {
     public static final ItemCardSecurityLink SECURITYLINK_CARD=Null();
     public static final ItemExtractorUpgradeBooster EXTRACTOR_UPGRADE_BOOSTER=Null();
     public static final ItemForcePowerCrystal FORCEPOWER_CRYSTAL=Null();
-    public static final ItemForcicumCell FORCICIUM_CELL=Null();
+    public static final ItemForciciumCell FORCICIUM_CELL=Null();
     public static final ItemProjectorFieldModulatorDistance PROJECTOR_DISTANCE=Null();
     public static final ItemProjectorFieldModulatorStrength PROJECTOR_STRENGTH=Null();
     public static final ItemProjectorFocusMatrix PROJECTOR_FOCUS_MATRIX=Null();
@@ -78,7 +78,7 @@ public class ModItems {
                     new ItemCardSecurityLink(),
                     new ItemExtractorUpgradeBooster(),
                     new ItemForcePowerCrystal(),
-                    new ItemForcicumCell(),
+                    new ItemForciciumCell(),
                     new ItemProjectorFieldModulatorDistance(),
                     new ItemProjectorFieldModulatorStrength(),
                     new ItemProjectorFocusMatrix(),
