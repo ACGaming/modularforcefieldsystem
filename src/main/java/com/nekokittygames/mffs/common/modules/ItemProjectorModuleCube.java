@@ -145,17 +145,6 @@ public class ItemProjectorModuleCube extends Module3DBase {
 
 	}
 
-	private static void addOctant(Set<PointXYZ> pointXYZSet, int x, int y, int z) {
-		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(x, -y, z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, -z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(-x, -y, z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(x, -y, -z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, -z), 0));
-		pointXYZSet.add(new PointXYZ(new BlockPos(-x, -y, -z), 0));
-	}
-
 	private static void addHalfOctant(Set<PointXYZ> pointXYZSet, int x, int y, int z) {
 		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, z), 0));
 		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, z), 0));
