@@ -23,12 +23,10 @@ package com.nekokittygames.mffs.common.modules;
 import com.nekokittygames.mffs.api.PointXYZ;
 import com.nekokittygames.mffs.common.IModularProjector;
 import com.nekokittygames.mffs.common.IModularProjector.Slots;
-import com.nekokittygames.mffs.common.ModularForceFieldSystem;
 import com.nekokittygames.mffs.common.item.ModItems;
 import com.nekokittygames.mffs.common.options.*;
 import com.nekokittygames.mffs.common.tileentity.TileEntityProjector;
 import com.nekokittygames.mffs.libs.LibItemNames;
-import com.nekokittygames.mffs.libs.LibMisc;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -64,7 +62,7 @@ public class ItemProjectorModuleCube extends Module3DBase {
 		int radius = projector.countItemsInSlot(Slots.Distance) + 4;
 		TileEntity te = (TileEntity) projector;
 
-		int yDown = radius;
+		int yDown = -radius;
 		int yTop = radius;
 		if (te.getPos().getY()+ radius > 255) {
 			yTop = 255 - te.getPos().getY();
@@ -75,6 +73,7 @@ public class ItemProjectorModuleCube extends Module3DBase {
 			yDown = 0;
 		}
 
+		/*
 		for (int y1 = -yDown; y1 <= yTop; y1++) {
 			for (int x1 = -radius; x1 <= radius; x1++) {
 				for (int z1 = -radius; z1 <= radius; z1++) {
@@ -88,8 +87,71 @@ public class ItemProjectorModuleCube extends Module3DBase {
 				}
 			}
 		}
+		*/
+		//Add upper half interior
+		for (int y1 = 0; y1 < yTop; y1++) {
+			for (int x1 = 0; x1 < radius; x1++) {
+				for (int z1 = 0; z1 < radius; z1++) {
+					addHalfOctant(ffInterior, x1, y1, z1);
+				}
+			}
+		}
+		//Add upper half ff
+		//ceiling
+		for (int x1 = 0; x1 <= radius; x1++) {
+			for (int z1 = 0; z1 <= radius; z1++) {
+				addHalfOctant(ffLocs, x1, yTop, z1);
+			}
+		}
+		//wall
+		for (int y1 = 0; y1 < yTop; y1++) {
+			for (int x1 = 0; x1 <= radius; x1++) {
+				addHalfOctant(ffLocs, x1, y1, radius);
+			}
+			for (int z1 = 0; z1 <= radius; z1++) {
+				addHalfOctant(ffLocs, radius, y1, z1);
+			}
+		}
+
+		if(yDown < 0) {
+			//Add lower half interior
+			for (int y1 = yDown + 1; y1 < 0; y1++) {
+				for (int x1 = 0; x1 < radius; x1++) {
+					for (int z1 = 0; z1 < radius; z1++) {
+
+						addHalfOctant(ffInterior, x1, y1, z1);
+
+					}
+				}
+			}
+			//Add lower half ff
+			//floor
+			for (int x1 = 0; x1 <= radius; x1++) {
+				for (int z1 = 0; z1 <= radius; z1++) {
+					addHalfOctant(ffLocs, x1, yDown, z1);
+				}
+			}
+			//wall
+			for (int y1 = yDown; y1 < 0; y1++) {
+				for (int x1 = 0; x1 <= radius; x1++) {
+					addHalfOctant(ffLocs, x1, y1, radius);
+				}
+				for (int z1 = 0; z1 <= radius; z1++) {
+					addHalfOctant(ffLocs, radius, y1, z1);
+				}
+			}
+		}
+
 
 	}
+
+	private static void addHalfOctant(Set<PointXYZ> pointXYZSet, int x, int y, int z) {
+		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, -z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, -z), 0));
+	}
+
 
 	public static boolean supportsOption(ItemProjectorOptionBase item) {
 
@@ -109,9 +171,7 @@ public class ItemProjectorModuleCube extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 
 	}
 
@@ -134,9 +194,7 @@ public class ItemProjectorModuleCube extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 	}
 
 }

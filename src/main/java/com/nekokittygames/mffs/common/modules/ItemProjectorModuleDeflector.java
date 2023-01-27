@@ -20,17 +20,15 @@
 
 package com.nekokittygames.mffs.common.modules;
 
-import java.util.Set;
-
 import com.nekokittygames.mffs.api.PointXYZ;
 import com.nekokittygames.mffs.common.IModularProjector;
 import com.nekokittygames.mffs.common.IModularProjector.Slots;
 import com.nekokittygames.mffs.common.options.*;
 import com.nekokittygames.mffs.libs.LibItemNames;
-import com.nekokittygames.mffs.libs.LibMisc;
 import net.minecraft.item.Item;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+
+import java.util.Set;
 
 public class ItemProjectorModuleDeflector extends ModuleBase {
 	public ItemProjectorModuleDeflector() {
@@ -61,43 +59,45 @@ public class ItemProjectorModuleDeflector extends ModuleBase {
 		int tpy = 0;
 		int tpz = 0;
 
-		for (int x1 = 0 - projector.countItemsInSlot(Slots.FocusLeft); x1 < projector
+		for (int x1 = -projector.countItemsInSlot(Slots.FocusLeft); x1 < projector
 				.countItemsInSlot(Slots.FocusRight) + 1; x1++) {
-			for (int z1 = 0 - projector.countItemsInSlot(Slots.FocusUp); z1 < projector
+			for (int z1 = -projector.countItemsInSlot(Slots.FocusUp); z1 < projector
 					.countItemsInSlot(Slots.FocusDown) + 1; z1++) {
-				if (projector.getSide() == EnumFacing.DOWN) {
-					tpy = 0 - projector.countItemsInSlot(Slots.Distance) - 1;
-					tpx = x1;
-					tpz = z1;
-				}
+				switch (projector.getSide()) {
+					case DOWN:
+						tpy = -projector.countItemsInSlot(Slots.Distance) - 1;
+						tpx = x1;
+						tpz = z1;
+						break;
 
-				if (projector.getSide() == EnumFacing.UP) {
-					tpy = 0 + projector.countItemsInSlot(Slots.Distance) + 1;
-					tpx = x1;
-					tpz = z1;
-				}
+					case UP:
+						tpy = projector.countItemsInSlot(Slots.Distance) + 1;
+						tpx = x1;
+						tpz = z1;
+						break;
 
-				if (projector.getSide() == EnumFacing.NORTH) {
-					tpz = 0 - projector.countItemsInSlot(Slots.Distance) - 1;
-					tpy = z1 - z1 - z1;
-					tpx = x1 - x1 - x1;
-				}
+					case NORTH:
+						tpz = -projector.countItemsInSlot(Slots.Distance) - 1;
+						tpy = -z1;
+						tpx = -x1;
+						break;
 
-				if (projector.getSide() == EnumFacing.SOUTH) {
-					tpz = 0 + projector.countItemsInSlot(Slots.Distance) + 1;
-					tpy = z1 - z1 - z1;
-					tpx = x1;
-				}
+					case SOUTH:
+						tpz = projector.countItemsInSlot(Slots.Distance) + 1;
+						tpy = -z1;
+						tpx = x1;
+						break;
 
-				if (projector.getSide() == EnumFacing.WEST) {
-					tpx = 0 - projector.countItemsInSlot(Slots.Distance) - 1;
-					tpy = z1 - z1 - z1;
-					tpz = x1;
-				}
-				if (projector.getSide() == EnumFacing.EAST) {
-					tpx = 0 + projector.countItemsInSlot(Slots.Distance) + 1;
-					tpy = z1 - z1 - z1;
-					tpz = x1 - x1 - x1;
+					case WEST:
+						tpx = -projector.countItemsInSlot(Slots.Distance) - 1;
+						tpy = -z1;
+						tpz = x1;
+						break;
+					case EAST:
+						tpx = projector.countItemsInSlot(Slots.Distance) + 1;
+						tpy = -z1;
+						tpz = -x1;
+						break;
 				}
 
 				ffLocs.add(new PointXYZ(new BlockPos(tpx, tpy, tpz), 0));
@@ -114,9 +114,7 @@ public class ItemProjectorModuleDeflector extends ModuleBase {
 			return true;
 		if (item instanceof ItemProjectorOptionTouchDamage)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 
 	}
 
@@ -129,9 +127,7 @@ public class ItemProjectorModuleDeflector extends ModuleBase {
 			return true;
 		if (item instanceof ItemProjectorOptionTouchDamage)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 	}
 
 }

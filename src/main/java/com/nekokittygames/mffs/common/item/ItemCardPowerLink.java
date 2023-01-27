@@ -198,7 +198,7 @@ public class ItemCardPowerLink extends ItemCard implements IPowerLinkItem {
 						}
 
 					}
-					if (world.getChunkFromBlockCoords(png.pos).isLoaded())
+					if (world.getChunk(png.pos).isLoaded())
 						((ItemCard) itemStack.getItem()).setinvalid(itemStack);
 
 				}

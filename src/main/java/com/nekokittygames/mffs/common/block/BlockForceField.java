@@ -107,7 +107,7 @@ public class BlockForceField extends Block implements IForceFieldBlock ,ITileEnt
 	}
 
 	@Override
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
@@ -125,7 +125,7 @@ public class BlockForceField extends Block implements IForceFieldBlock ,ITileEnt
 		this.setDefaultState(blockState.getBaseState().withProperty(FORCEFIELD_TYPE,ForceFieldTyps.Default));
 		this.setRegistryName(ModularForceFieldSystem.MODID, LibBlockNames.FORCE_FIELD);
 		final ResourceLocation registryName = Objects.requireNonNull(this.getRegistryName());
-		this.setUnlocalizedName(registryName.toString());
+		this.setTranslationKey(registryName.toString());
 	}
 
 
@@ -190,7 +190,7 @@ public class BlockForceField extends Block implements IForceFieldBlock ,ITileEnt
 								.getProjectorID());
 					} else {
 						world.setBlockState(pos,ModBlocks.FORCE_FIELD.getDefaultState().withProperty(FORCEFIELD_TYPE,ffworldmap.getTyp()));
-						world.markAndNotifyBlock(pos,world.getChunkFromBlockCoords(pos),world.getBlockState(pos),ModBlocks.FORCE_FIELD.getDefaultState().withProperty(FORCEFIELD_TYPE,ffworldmap.getTyp()),3);
+						world.markAndNotifyBlock(pos,world.getChunk(pos),world.getBlockState(pos),ModBlocks.FORCE_FIELD.getDefaultState().withProperty(FORCEFIELD_TYPE,ffworldmap.getTyp()),3);
 						ffworldmap.setSync(true);
 
 						if (ffworldmap.getTyp() == ForceFieldTyps.Default) {
@@ -478,7 +478,7 @@ public class BlockForceField extends Block implements IForceFieldBlock ,ITileEnt
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (state.getValue(FORCEFIELD_TYPE) == ForceFieldTyps.Zapper) {
 			if (entity instanceof EntityLiving) {
 				entity.attackEntityFrom(MFFSDamageSource.fieldShock, 10);

@@ -117,7 +117,7 @@ public class ModItems {
         @SubscribeEvent
         public static void registerTextures(ModelRegistryEvent event) {
         	for (Item item : ITEMS) {
-        		ModularForceFieldSystem.proxy.setupClientItem(item, item.getRegistryName().getResourcePath());
+        		ModularForceFieldSystem.proxy.setupClientItem(item, item.getRegistryName().getPath());
         	}
         }
     }

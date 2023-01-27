@@ -23,12 +23,10 @@ package com.nekokittygames.mffs.common.modules;
 import com.nekokittygames.mffs.api.PointXYZ;
 import com.nekokittygames.mffs.common.IModularProjector;
 import com.nekokittygames.mffs.common.IModularProjector.Slots;
-import com.nekokittygames.mffs.common.ModularForceFieldSystem;
 import com.nekokittygames.mffs.common.item.ModItems;
 import com.nekokittygames.mffs.common.options.*;
 import com.nekokittygames.mffs.common.tileentity.TileEntityProjector;
 import com.nekokittygames.mffs.libs.LibItemNames;
-import com.nekokittygames.mffs.libs.LibMisc;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 
@@ -60,33 +58,43 @@ public class ItemProjectorModuleSphere extends Module3DBase {
 			Set<PointXYZ> ffLocs, Set<PointXYZ> ffInterior) {
 		int radius = projector.countItemsInSlot(Slots.Distance) + 4;
 
-		int yDown = radius;
+		boolean half = ((TileEntityProjector) projector).hasOption(
+				ModItems.OPTION_FIELD_MANIPULATOR, true);
 
-		if (((TileEntityProjector) projector).hasOption(
-				ModItems.OPTION_FIELD_MANIPULATOR, true)) {
-			yDown = 0;
-		}
+		for (int y1 = 0; y1 <= radius; y1++) {
+			for (int x1 = 0; x1 <= radius; x1++) {
+				for (int z1 = 0; z1 <= radius; z1++) {
 
-		for (int y1 = -yDown; y1 <= radius; y1++) {
-			for (int x1 = -radius; x1 <= radius; x1++) {
-				for (int z1 = -radius; z1 <= radius; z1++) {
-					int dx = x1;
-					int dy = y1;
-					int dz = z1;
+					int dist = (int) Math.round(Math.sqrt(
+							x1 * x1 + y1 * y1 + z1 * z1));
 
-					int dist = (int) Math.round(Math.sqrt(dx * dx + dy * dy
-							+ dz * dz));
-
+					//Needs better algorithm
 					if (dist <= radius
 							&& dist > (radius - (projector
 									.countItemsInSlot(Slots.Strength) + 1))) {
-						ffLocs.add(new PointXYZ(new BlockPos(x1, y1, z1), 0));
+						addHalfOctant(ffLocs, x1, y1, z1);
 					} else if (dist <= radius) {
-						ffInterior.add(new PointXYZ(x1, y1, z1, 0));
+						addHalfOctant(ffInterior, x1, y1, z1);
+					}
+					if(!half){
+						if (dist <= radius
+								&& dist > (radius - (projector
+								.countItemsInSlot(Slots.Strength) + 1))) {
+							addHalfOctant(ffLocs, x1, -y1, z1);
+						} else if (dist <= radius) {
+							addHalfOctant(ffInterior, x1, -y1, z1);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	private static void addHalfOctant(Set<PointXYZ> pointXYZSet, int x, int y, int z) {
+		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(x, y, -z), 0));
+		pointXYZSet.add(new PointXYZ(new BlockPos(-x, y, -z), 0));
 	}
 
 	public static boolean supportsOption(ItemProjectorOptionBase item) {
@@ -107,9 +115,7 @@ public class ItemProjectorModuleSphere extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 
 	}
 
@@ -132,9 +138,7 @@ public class ItemProjectorModuleSphere extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 	}
 
 }

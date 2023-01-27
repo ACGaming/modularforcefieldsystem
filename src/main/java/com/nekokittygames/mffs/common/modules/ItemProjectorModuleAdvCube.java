@@ -23,12 +23,10 @@ package com.nekokittygames.mffs.common.modules;
 import com.nekokittygames.mffs.api.PointXYZ;
 import com.nekokittygames.mffs.common.IModularProjector;
 import com.nekokittygames.mffs.common.IModularProjector.Slots;
-import com.nekokittygames.mffs.common.ModularForceFieldSystem;
 import com.nekokittygames.mffs.common.item.ModItems;
 import com.nekokittygames.mffs.common.options.*;
 import com.nekokittygames.mffs.common.tileentity.TileEntityProjector;
 import com.nekokittygames.mffs.libs.LibItemNames;
-import com.nekokittygames.mffs.libs.LibMisc;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -73,80 +71,73 @@ public class ItemProjectorModuleAdvCube extends Module3DBase {
 		int Strength = projector.countItemsInSlot(Slots.Strength) + 2;
 
 		for (int y1 = 0; y1 <= Strength; y1++) {
-			for (int x1 = 0 - xMout; x1 < xPout + 1; x1++) {
-				for (int z1 = 0 - zPout; z1 < zMout + 1; z1++) {
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.DOWN) {
+			for (int x1 = -xMout; x1 < xPout + 1; x1++) {
+				for (int z1 = -zPout; z1 < zMout + 1; z1++) {
+					switch (((TileEntityProjector) projector).getSide()) {
+						case DOWN:
 
-						tpy = y1 - y1 - y1 + 1;
-						tpx = x1;
-						tpz = z1;
+						case UP:
+							tpy = -y1 + 1;
+							tpx = x1;
+							tpz = z1;
+							break;
+
+						case NORTH:
+							tpz = -y1 + 1;
+							tpy = -z1;
+							tpx = -x1;
+							break;
+
+						case SOUTH:
+							tpz = y1 - 1;
+							tpy = -z1;
+							tpx = x1;
+							break;
+
+						case WEST:
+							tpx = -y1 + 1;
+							tpy = -z1;
+							tpz = x1;
+							break;
+
+						case EAST:
+							tpx = y1 - 1;
+							tpy = -z1;
+							tpz = -x1;
+							break;
 					}
 
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.UP) {
-
-						tpy = y1 - 1;
-						tpx = x1;
-						tpz = z1;
-					}
-
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.NORTH) {
-
-						tpz = y1 - y1 - y1 + 1;
-						tpy = z1 - z1 - z1;
-						tpx = x1 - x1 - x1;
-					}
-
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.SOUTH) {
-
-						tpz = y1 - 1;
-						tpy = z1 - z1 - z1;
-						tpx = x1;
-					}
-
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.WEST) {
-
-						tpx = y1 - y1 - y1 + 1;
-						tpy = z1 - z1 - z1;
-						tpz = x1;
-					}
-					if (((TileEntityProjector) projector).getSide() == EnumFacing.EAST) {
-
-						tpx = y1 - 1;
-						tpy = z1 - z1 - z1;
-						tpz = x1 - x1 - x1;
-					}
-
-					if (y1 == 0 || y1 == Strength || x1 == 0 - xMout
-							|| x1 == xPout || z1 == 0 - zPout || z1 == zMout) {
+					if (y1 == 0 || y1 == Strength || x1 == -xMout
+							|| x1 == xPout || z1 == -zPout || z1 == zMout) {
 						if (((TileEntityProjector) projector)
 								.hasOption(
 										ModItems.OPTION_FIELD_MANIPULATOR,
 										true)) {
 							switch (((TileEntityProjector) projector).getSide()) {
 								case DOWN:
-								if ((((TileEntityProjector) projector).getPos().getY() + tpy) > ((TileEntityProjector) projector).getPos().getY())
-									continue;
-								break;
-							case UP:
-								if ((((TileEntityProjector) projector).getPos().getY() + tpy) < ((TileEntityProjector) projector).getPos().getY())
-									continue;
-								break;
+									if ((((TileEntityProjector) projector).getPos().getY() + tpy) > ((TileEntityProjector) projector).getPos().getY())
+										continue;
+									break;
+								case UP:
+									if ((((TileEntityProjector) projector).getPos().getY() + tpy) < ((TileEntityProjector) projector).getPos().getY())
+										continue;
+									break;
 								case NORTH:
-								if ((((TileEntityProjector) projector).getPos().getZ() + tpz) > ((TileEntityProjector) projector).getPos().getZ())
-									continue;
-								break;
-							case SOUTH:
-								if ((((TileEntityProjector) projector).getPos().getZ() + tpz) < ((TileEntityProjector) projector).getPos().getZ())
-									continue;
-								break;
-							case WEST:
-								if ((((TileEntityProjector) projector).getPos().getX()+ tpx) > ((TileEntityProjector) projector).getPos().getX())
-									continue;
-								break;
-							case EAST:
-								if ((((TileEntityProjector) projector).getPos().getX()+ tpx) < ((TileEntityProjector) projector).getPos().getX())
-									continue;
-								break;
+									if ((((TileEntityProjector) projector).getPos().getZ() + tpz) > ((TileEntityProjector) projector).getPos().getZ())
+										continue;
+									break;
+								case SOUTH:
+									if ((((TileEntityProjector) projector).getPos().getZ() + tpz) < ((TileEntityProjector) projector).getPos().getZ())
+										continue;
+									break;
+								case WEST:
+									if ((((TileEntityProjector) projector).getPos().getX()+ tpx) > ((TileEntityProjector) projector).getPos().getX())
+										continue;
+									break;
+								case EAST:
+									if ((((TileEntityProjector) projector).getPos().getX()+ tpx) < ((TileEntityProjector) projector).getPos().getX())
+										continue;
+									break;
 							}
 						}
 
@@ -180,9 +171,7 @@ public class ItemProjectorModuleAdvCube extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 
 	}
 
@@ -205,10 +194,7 @@ public class ItemProjectorModuleAdvCube extends Module3DBase {
 			return true;
 		if (item instanceof ItemProjectorOptionBlockBreaker)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 	}
 
 }

@@ -77,7 +77,7 @@ public abstract class BlockMFFSBase extends Block implements ITileEntityProvider
 	private static void setBlockName(final Block block, final String blockName) {
 		block.setRegistryName(ModularForceFieldSystem.MODID, blockName);
 		final ResourceLocation registryName = Objects.requireNonNull(block.getRegistryName());
-		block.setUnlocalizedName(registryName.toString());
+		block.setTranslationKey(registryName.toString());
 	}
 	@Override
 	protected BlockStateContainer createBlockState() {
