@@ -128,7 +128,7 @@ public class ItemCardSecurityLink extends ItemCard {
 						}
 
 					}
-					if (world.getChunkFromBlockCoords(png.pos).isLoaded())
+					if (world.getChunk(png.pos).isLoaded())
 						inventiory
 								.setInventorySlotContents(
 										slot,

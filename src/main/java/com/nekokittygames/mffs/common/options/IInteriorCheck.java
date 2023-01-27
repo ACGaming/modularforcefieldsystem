@@ -6,7 +6,7 @@ import net.minecraft.world.World;
 
 public interface IInteriorCheck {
 
-	public void checkInteriorBlock(PointXYZ png, World world,
+	void checkInteriorBlock(PointXYZ png, World world,
 			TileEntityProjector Projector);
 
 }

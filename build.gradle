@@ -4,7 +4,7 @@ buildscript {
         maven { url = "https://maven.minecraftforge.net" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3.4'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -33,7 +33,7 @@ boolean dev = System.getenv("RELEASE") == null || System.getenv("RELEASE").equal
 minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
-	mappings = "snapshot_20171003"
+	mappings = "stable_39"
 }
 
 repositories {

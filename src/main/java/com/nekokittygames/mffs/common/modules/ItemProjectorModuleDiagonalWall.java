@@ -89,47 +89,45 @@ public class ItemProjectorModuleDiagonalWall extends ItemProjectorModuleWall {
 					projector.countItemsInSlot(Slots.FocusRight)));
 		}
 
-		for (int x1 = 0 - zstart; x1 < zend + 1; x1++) {
-			for (int z1 = 0 - xstart; z1 < xend + 1; z1++) {
+		for (int x1 = -zstart; x1 < zend + 1; x1++) {
+			for (int z1 = -xstart; z1 < xend + 1; z1++) {
 				for (int y1 = 1; y1 < projector
 						.countItemsInSlot(Slots.Strength) + 1 + 1; y1++) {
+					switch (projector.getSide()) {
+						case DOWN:
+							tpy = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpz = -z1;
+							break;
 
-					if (projector.getSide() == EnumFacing.DOWN) {
-						tpy = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpz = z1 - z1 - z1;
-					}
+						case UP:
+							tpy = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpz = -z1;
+							break;
 
-					if (projector.getSide() == EnumFacing.UP) {
-						tpy = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpz = z1 - z1 - z1;
-					}
+						case NORTH:
+							tpz = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpx = -x1;
+							tpy = z1;
+							break;
 
-					if (projector.getSide() == EnumFacing.NORTH) {
-						tpz = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpx = x1 - x1 - x1;
-						tpy = z1;
-					}
+						case SOUTH:
+							tpz = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpy = z1;
+							break;
 
-					if (projector.getSide() == EnumFacing.SOUTH) {
-						tpz = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpy = z1;
-					}
-
-					if (projector.getSide() == EnumFacing.WEST) {
-						tpx = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpz = x1;
-						tpy = z1;
-					}
-					if (projector.getSide() == EnumFacing.EAST) {
-						tpx = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpz = x1 - x1 - x1;
-						tpy = z1;
+						case WEST:
+							tpx = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpz = x1;
+							tpy = z1;
+							break;
+						case EAST:
+							tpx = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpz = -x1;
+							tpy = z1;
+							break;
 					}
 
 					if ((projector.getSide() == EnumFacing.UP || projector.getSide() == EnumFacing.DOWN)

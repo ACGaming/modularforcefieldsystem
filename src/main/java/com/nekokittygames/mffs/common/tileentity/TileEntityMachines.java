@@ -201,7 +201,7 @@ public abstract class TileEntityMachines extends TileEntity implements
 	public boolean isRedstoneSignal() {
 		// if(world.isBlockGettingPowered(xCoord,yCoord, zCoord) ||
 		if (world.getStrongPower(pos) > 0
-				|| world.isBlockIndirectlyGettingPowered(pos)>0)
+				|| world.isBlockPowered(pos))
 			return true;
 		return false;
 	}

@@ -42,7 +42,7 @@ public class ItemMFFSBase extends Item {
 	public static void setItemName(ItemMFFSBase item, String itemName) {
 		item.setRegistryName(ModularForceFieldSystem.MODID,itemName);
 		final ResourceLocation regName= Objects.requireNonNull(item.getRegistryName());
-		item.setUnlocalizedName(regName.toString());
+		item.setTranslationKey(regName.toString());
 	}
 
 	private boolean isInCreativeTab() {

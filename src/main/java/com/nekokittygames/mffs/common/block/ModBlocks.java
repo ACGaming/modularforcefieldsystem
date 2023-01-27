@@ -82,14 +82,14 @@ public class ModBlocks {
         
         @SubscribeEvent
         public static void registerTextures(ModelRegistryEvent event) {
-        	ModularForceFieldSystem.proxy.setupClientBlock(MONAZIT_ORE, MONAZIT_ORE.getRegistryName().getResourcePath());
+        	ModularForceFieldSystem.proxy.setupClientBlock(MONAZIT_ORE, MONAZIT_ORE.getRegistryName().getPath());
         	for (MFFSMaschines mach : MFFSMaschines.values()) {
-        		ModularForceFieldSystem.proxy.setupClientMachine((BlockMFFSBase) mach.block, mach.block.getRegistryName().getResourcePath());
+        		ModularForceFieldSystem.proxy.setupClientMachine((BlockMFFSBase) mach.block, mach.block.getRegistryName().getPath());
         	}
-        	ModularForceFieldSystem.proxy.setupClientFieldBlock(FORCE_FIELD, FORCE_FIELD.getRegistryName().getResourcePath());
+        	ModularForceFieldSystem.proxy.setupClientFieldBlock(FORCE_FIELD, FORCE_FIELD.getRegistryName().getPath());
         	
         	for (Item item : ITEM_BLOCKS) {
-        		ModularForceFieldSystem.proxy.setupClientItem(item, item.getRegistryName().getResourcePath());
+        		ModularForceFieldSystem.proxy.setupClientItem(item, item.getRegistryName().getPath());
         	}
         }
     }

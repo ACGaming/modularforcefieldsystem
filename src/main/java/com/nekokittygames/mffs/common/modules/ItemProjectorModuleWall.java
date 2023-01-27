@@ -65,59 +65,58 @@ public class ItemProjectorModuleWall extends ModuleBase {
 		int tpy = 0;
 		int tpz = 0;
 
-		for (int x1 = 0 - projector.countItemsInSlot(Slots.FocusLeft); x1 < projector
+		for (int x1 = -projector.countItemsInSlot(Slots.FocusLeft); x1 < projector
 				.countItemsInSlot(Slots.FocusRight) + 1; x1++) {
-			for (int z1 = 0 - projector.countItemsInSlot(Slots.FocusDown); z1 < projector
+			for (int z1 = -projector.countItemsInSlot(Slots.FocusDown); z1 < projector
 					.countItemsInSlot(Slots.FocusUp) + 1; z1++) {
 				for (int y1 = 1; y1 < projector
 						.countItemsInSlot(Slots.Strength) + 1 + 1; y1++) {
-					if (projector.getSide() == EnumFacing.UP) {
-						tpy = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpz = z1 - z1 - z1;
+					switch (projector.getSide()) {
+						case UP:
+							tpy = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpz = -z1;
+							break;
+
+						case DOWN:
+							tpy = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpz = -z1;
+							break;
+
+						case NORTH:
+							tpz = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpx = -x1;
+							tpy = z1;
+							break;
+
+						case SOUTH:
+							tpz = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpx = x1;
+							tpy = z1;
+							break;
+
+						case WEST:
+							tpx = -y1 - projector.countItemsInSlot(Slots.Distance);
+							tpz = x1;
+							tpy = z1;
+							break;
+						case EAST:
+							tpx = y1 + projector.countItemsInSlot(Slots.Distance);
+							tpz = -x1;
+							tpy = z1;
+							break;
 					}
 
-					if (projector.getSide() == EnumFacing.DOWN) {
-						tpy = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpz = z1 - z1 - z1;
-					}
-
-					if (projector.getSide() == EnumFacing.NORTH) {
-						tpz = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpx = x1 - x1 - x1;
-						tpy = z1;
-					}
-
-					if (projector.getSide() == EnumFacing.SOUTH) {
-						tpz = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpx = x1;
-						tpy = z1;
-					}
-
-					if (projector.getSide() == EnumFacing.WEST) {
-						tpx = y1 - y1 - y1
-								- projector.countItemsInSlot(Slots.Distance);
-						tpz = x1;
-						tpy = z1;
-					}
-					if (projector.getSide() == EnumFacing.EAST) {
-						tpx = y1 + projector.countItemsInSlot(Slots.Distance);
-						tpz = x1 - x1 - x1;
-						tpy = z1;
-					}
-
-					if ((projector.getSide() == EnumFacing.UP || projector.getSide() == EnumFacing.DOWN)
-							&& ((tpx == 0 && tpz != 0)
-									|| (tpz == 0 && tpx != 0) || (tpz == 0 && tpx == 0))
-							|| (projector.getSide() == EnumFacing.NORTH || projector.getSide() == EnumFacing.SOUTH)
-							&& ((tpx == 0 && tpy != 0)
-									|| (tpy == 0 && tpx != 0) || (tpy == 0 && tpx == 0))
-							|| (projector.getSide() == EnumFacing.WEST || projector.getSide() == EnumFacing.EAST)
-							&& ((tpz == 0 && tpy != 0)
-									|| (tpy == 0 && tpz != 0) || (tpy == 0 && tpz == 0)))
+					if ((projector.getSide() == EnumFacing.UP ||
+							projector.getSide() == EnumFacing.DOWN) &&
+							(tpx == 0 || tpz == 0) ||
+							(projector.getSide() == EnumFacing.NORTH ||
+									projector.getSide() == EnumFacing.SOUTH) &&
+									(tpx == 0 || tpy == 0) ||
+							(projector.getSide() == EnumFacing.WEST ||
+									projector.getSide() == EnumFacing.EAST) &&
+									(tpz == 0 || tpy == 0))
 
 					{
 						ffLocs.add(new PointXYZ(new BlockPos(tpx, tpy, tpz), 0));
@@ -136,9 +135,7 @@ public class ItemProjectorModuleWall extends ModuleBase {
 			return true;
 		if (item instanceof ItemProjectorOptionTouchDamage)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 
 	}
 
@@ -151,9 +148,7 @@ public class ItemProjectorModuleWall extends ModuleBase {
 			return true;
 		if (item instanceof ItemProjectorOptionTouchDamage)
 			return true;
-		if(item instanceof ItemProjectorOptionLight)
-			return true;
-		return false;
+		return item instanceof ItemProjectorOptionLight;
 	}
 
 }

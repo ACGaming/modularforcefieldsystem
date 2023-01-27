@@ -78,7 +78,6 @@ public class ItemProjectorModuleTube extends Module3DBase {
 			tpx = distance;
 			tpz = distance;
 
-			y_offset_s = Strength - Strength;
 			if (((TileEntityProjector) projector).hasOption(
 					ModItems.OPTION_FIELD_MANIPULATOR, true)) {
 				if (projector.getSide() == EnumFacing.UP) {
@@ -95,7 +94,6 @@ public class ItemProjectorModuleTube extends Module3DBase {
 			tpz = Strength;
 			tpx = distance;
 
-			z_offset_s = Strength - Strength;
 			if (((TileEntityProjector) projector).hasOption(
 					ModItems.OPTION_FIELD_MANIPULATOR, true)) {
 				if (projector.getSide() == EnumFacing.NORTH) {
@@ -111,7 +109,6 @@ public class ItemProjectorModuleTube extends Module3DBase {
 			tpz = distance;
 			tpx = Strength;
 
-			x_offset_s = Strength - Strength;
 			if (((TileEntityProjector) projector).hasOption(
 					ModItems.OPTION_FIELD_MANIPULATOR, true)) {
 				if (projector.getSide() == EnumFacing.WEST) {
@@ -123,9 +120,9 @@ public class ItemProjectorModuleTube extends Module3DBase {
 			}
 		}
 
-		for (int z1 = 0 - tpz + z_offset_s; z1 <= tpz - z_offset_e; z1++) {
-			for (int x1 = 0 - tpx + x_offset_s; x1 <= tpx - x_offset_e; x1++) {
-				for (int y1 = 0 - tpy + y_offset_s; y1 <= tpy - y_offset_e; y1++) {
+		for (int z1 = -tpz + z_offset_s; z1 <= tpz - z_offset_e; z1++) {
+			for (int x1 = -tpx + x_offset_s; x1 <= tpx - x_offset_e; x1++) {
+				for (int y1 = -tpy + y_offset_s; y1 <= tpy - y_offset_e; y1++) {
 					int tpx_temp = tpx;
 					int tpy_temp = tpy;
 					int tpz_temp = tpz;
@@ -143,9 +140,9 @@ public class ItemProjectorModuleTube extends Module3DBase {
 						tpz_temp += 1;
 					}
 
-					if ((x1 == 0 - tpx_temp || x1 == tpx_temp
-							|| y1 == 0 - tpy_temp || y1 == tpy_temp
-							|| z1 == 0 - tpz_temp || z1 == tpz_temp)
+					if ((x1 == -tpx_temp || x1 == tpx_temp
+							|| y1 == -tpy_temp || y1 == tpy_temp
+							|| z1 == -tpz_temp || z1 == tpz_temp)
 							&& ((((TileEntityProjector) projector).getPos().getY()+ y1) >= 0)) {
 						ffLocs.add(new PointXYZ(new BlockPos(x1, y1, z1), 0));
 					} else {

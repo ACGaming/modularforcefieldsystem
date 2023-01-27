@@ -304,10 +304,8 @@ public class TileEntityProjector extends TileEntityFEPoweredMachine implements
 				Linkgrid.getWorldMap(world).getFieldFusion()
 						.put(getDeviceID(), this);
 		} else {
-			if (Linkgrid.getWorldMap(world).getFieldFusion()
-					.containsKey(getDeviceID()))
-				Linkgrid.getWorldMap(world).getFieldFusion()
-						.remove(getDeviceID());
+			Linkgrid.getWorldMap(world).getFieldFusion()
+					.remove(getDeviceID());
 		}
 
 		if (hasOption(
@@ -318,10 +316,8 @@ public class TileEntityProjector extends TileEntityFEPoweredMachine implements
 				Linkgrid.getWorldMap(world).getJammer()
 						.put(getDeviceID(), this);
 		} else {
-			if (Linkgrid.getWorldMap(world).getJammer()
-					.containsKey(getDeviceID()))
-				Linkgrid.getWorldMap(world).getJammer()
-						.remove(getDeviceID());
+			Linkgrid.getWorldMap(world).getJammer()
+					.remove(getDeviceID());
 		}
 
 		if (hasValidTypeMod()) {
@@ -395,12 +391,11 @@ public class TileEntityProjector extends TileEntityFEPoweredMachine implements
 						true)) {
 			for (PointXYZ png : field_def) {
 
-				if (world.getChunkFromBlockCoords(png.pos).isLoaded()) {
+				if (world.getChunk(png.pos).isLoaded()) {
 
 					TileEntity tileEntity = world.getTileEntity(png.pos);
 
-					if (tileEntity != null
-							&& tileEntity instanceof TileEntityForceField) {
+					if (tileEntity instanceof TileEntityForceField) {
 						((TileEntityForceField) tileEntity).UpdateTextur();
 					}
 
@@ -628,7 +623,7 @@ public class TileEntityProjector extends TileEntityFEPoweredMachine implements
 
 				PointXYZ png = ffb.getPoint();
 
-				if (world.getChunkFromBlockCoords(png.pos).isLoaded()) {
+				if (world.getChunk(png.pos).isLoaded()) {
 					if (!ffb.isEmpty()) {
 						if (ffb.getProjectorID() == getDeviceID()) {
 							if (hasOption(
@@ -674,7 +669,7 @@ public class TileEntityProjector extends TileEntityFEPoweredMachine implements
 									world.setBlockState(
 											png.pos,
 											ModBlocks.FORCE_FIELD.getDefaultState().withProperty(BlockForceField.FORCEFIELD_TYPE,ffb.getTyp()), 3);
-									if(ffb.getTyp()==ForceFieldTyps.Camouflage)
+									if(ffb.getTyp()==ForceFieldTyps.Camouflage && world.getTileEntity(png.pos) instanceof TileEntityForceField)
 									{
 										((TileEntityForceField)world.getTileEntity(png.pos)).setForcefieldCamoblockid(getForcefieldCamoblock());
 										((TileEntityForceField)world.getTileEntity(png.pos)).setForcefieldCamoblockmeta(getForcefieldCamoblockMeta());

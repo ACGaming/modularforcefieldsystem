@@ -41,7 +41,7 @@ public class BlockMonazitOre extends Block {
 		setSoundType(SoundType.STONE);
 		this.setRegistryName(ModularForceFieldSystem.MODID, LibBlockNames.MONAZIT_ORE);
 		final ResourceLocation registryName = Objects.requireNonNull(this.getRegistryName());
-		this.setUnlocalizedName(registryName.toString());
+		this.setTranslationKey(registryName.toString());
 		setCreativeTab(ModularForceFieldSystem.MFFSTab);
 	}
 

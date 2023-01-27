@@ -311,7 +311,7 @@ public final class RecipesFactory {
 
 	public static void addShapelessRecipe(Item output, Object... objects) {
 		GameRegistry.addShapelessRecipe(new ResourceLocation(ModularForceFieldSystem.MODID,
-				(Arrays.toString(objects)+" => "+output.getUnlocalizedName()).replace(':', '.')),
+				(Arrays.toString(objects)+" => "+output.getTranslationKey()).replace(':', '.')),
 				null, new ItemStack(output),
 				//Turn all the objects into ingredients using Forge's helper method
 				Arrays.stream(objects).map(CraftingHelper::getIngredient).toArray(Ingredient[]::new));
