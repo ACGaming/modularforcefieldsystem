@@ -2,20 +2,20 @@ package com.nekokittygames.mffs.client.renderer;
 
 import com.nekokittygames.mffs.common.tileentity.TileEntityCapacitor;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.opengl.GL11;
 
 /**
  * Created by katsw on 29/09/2016.
  */
-public class CapacitorRenderer extends TileEntitySpecialRenderer<TileEntityCapacitor> {
-
+public class CapacitorRenderer extends FastTESR<TileEntityCapacitor> {
 
 
     @Override
-    public void render(TileEntityCapacitor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+    public void renderTileEntityFast(TileEntityCapacitor te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
         GL11.glPushMatrix();
         GL11.glPolygonOffset(-10, -10);
         GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -102,7 +102,7 @@ public class CapacitorRenderer extends TileEntitySpecialRenderer<TileEntityCapac
                         / 2
                         - offsetX
                         - fontRenderer.getStringWidth(String.valueOf(
-                        te.getPercentageStorageCapacity())
+                                te.getPercentageStorageCapacity())
                         .concat(" % ")), offsetY - realHeight / 2
                         - 0 * lineHeight, 1);
         fontRenderer.drawString("range: ", offsetX - realWidth / 2, 1

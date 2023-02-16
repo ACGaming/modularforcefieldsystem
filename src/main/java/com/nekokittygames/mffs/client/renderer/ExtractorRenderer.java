@@ -3,14 +3,16 @@ package com.nekokittygames.mffs.client.renderer;
 import com.nekokittygames.mffs.common.ModularForceFieldSystem;
 import com.nekokittygames.mffs.common.tileentity.TileEntityExtractor;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.opengl.GL11;
 
 /**
  * Created by katsw on 29/09/2016.
  */
-public class ExtractorRenderer extends TileEntitySpecialRenderer<TileEntityExtractor> {
+public class ExtractorRenderer extends FastTESR<TileEntityExtractor> {
 
     @Override
     public boolean isGlobalRenderer(TileEntityExtractor te) {
@@ -19,8 +21,8 @@ public class ExtractorRenderer extends TileEntitySpecialRenderer<TileEntityExtra
 
 
     @Override
-    public void render(TileEntityExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        super.render(te, x, y, z, partialTicks, destroyStage,alpha);
+    public void renderTileEntityFast(TileEntityExtractor te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+
         GL11.glPushMatrix();
         GL11.glPolygonOffset(-10, -10);
         GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -135,6 +137,5 @@ public class ExtractorRenderer extends TileEntitySpecialRenderer<TileEntityExtra
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         GL11.glPopMatrix();
-
     }
 }
