@@ -36,20 +36,21 @@ import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.model.animation.FastTESR;
 import org.lwjgl.opengl.GL11;
 
-public class MFFSBlockRenderer extends TileEntitySpecialRenderer<TileEntityForceField> {
+public class MFFSBlockRenderer extends FastTESR<TileEntityForceField> {
 
 
 	@Override
-	public void render(TileEntityForceField te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	public void renderTileEntityFast(TileEntityForceField te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
 		if(getWorld().getBlockState(new BlockPos(x,y,z)).getBlock()== ModBlocks.FORCE_FIELD) {
 			if (getWorld().getBlockState(new BlockPos(x, y, z)).getValue(BlockForceField.FORCEFIELD_TYPE) == ForceFieldTyps.Camouflage) {
 				IBlockState state = te.getForcefieldCamoblock().getStateFromMeta(te.getForcefieldCamoblockmeta());
-				BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-				buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+				//BufferBuilder buffer = Tessellator.getInstance().getBuffer();
+				//buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 				Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlock(state, new BlockPos(x, y, z), getWorld(), buffer);
-				Tessellator.getInstance().draw();
+				//Tessellator.getInstance().draw();
 			}
 		}
 	}
