@@ -61,7 +61,7 @@ import java.util.List;
 
 import static com.nekokittygames.mffs.common.ModularForceFieldSystem.MODID;
 
-@Mod(modid = MODID, name = "Modular ForceField System", version = "4.0.1.4", dependencies = "after:enderio;after:ic2")
+@Mod(modid = MODID, name = "Modular ForceField System", version = "4.0.1.5", dependencies = "after:enderio;after:ic2")
 public class ModularForceFieldSystem {
 
 	public static final String MODID="modularforcefieldsystem";
