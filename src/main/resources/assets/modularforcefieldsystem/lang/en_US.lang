@@ -31,12 +31,12 @@ item.modularforcefieldsystem:module_deflector.name=Projector Module: Deflector
 item.modularforcefieldsystem:module_sphere.name=Projector Module: Sphere
 item.modularforcefieldsystem:module_tube.name=Projector Module: Tube
 item.modularforcefieldsystem:module_wall.name=Projector Module: Wall
-item.modularforcefieldsystem:module_diagonal_wall.name=Diagnonal Wall Module
+item.modularforcefieldsystem:module_diagonal_wall.name=Diagonal Wall Module
 
 
 // Items: Projector Options
 item.modularforcefieldsystem:option_block_breaker.name=Projector Option: Cutter
-item.modularforcefieldsystem:option_camoflage.name=Projector Option: Camoflage
+item.modularforcefieldsystem:option_camoflage.name=Projector Option: Camouflage
 item.modularforcefieldsystem:option_defense_station.name=Projector Option: Defence Station
 item.modularforcefieldsystem:option_field_fusion.name=Projector Option: Field Fusion
 item.modularforcefieldsystem:option_field_manipulator.name=Projector Option: Dome
@@ -147,7 +147,7 @@ itemInfo.infinitePower.lineTwo=or infinitely charge a Capacitor.
 
 // Light
 mffs.guide.general.forciumEntry=Forcium
-mffs.guide.general.forcium.1=Forcium is the basic fuel for all MFFS based tech. It is a crystaline material that can carry more conventional power around and, emit it in force fields.
+mffs.guide.general.forcium.1=Forcium is the basic fuel for all MFFS based tech. It is a crystalline material that can carry more conventional power around and, emit it in force fields.
 
 mffs.guide.general.forcefieldEntry=Forcefields
 mffs.guide.general.forcefield.1=Forcefields are harnessed energy projected into space. This energy can take many different forms, and shapes. The usual form is a completely solid block, however with alterations to the projector, forms that leak energy, shock living creatures, forms that are strong enough to cut through
@@ -162,7 +162,7 @@ mffs.guide.general.machines.2=The different ways to turn a machine on in MFFS ca
 mffs.guide.general.category=General
 
 // About
-mffs.guide.general.about=Welcome to MFFS, This mod provides unbreakable forcefields for your use, and enjoyment in Minecraft! Theese forcefields come at the cost of power, and forcium, which can be mined easilly with any iron pick.
+mffs.guide.general.about=Welcome to MFFS, This mod provides unbreakable forcefields for your use, and enjoyment in Minecraft! These forcefields come at the cost of power, and forcium, which can be mined easily with any iron pick.
 
 mffs.guide.general.aboutEntry=About MFFS
 
@@ -188,7 +188,7 @@ mffs.guide.modules.cube.1=This Projector module allows you to project a  cube sh
 mffs.guide.modules.deflector=Deflector
 mffs.guide.modules.deflector.1=This Projector module allows you to project a flat plane in front of the projector.
 mffs.guide.modules.deflector.2=The Focus matrix within the four slots around the projector will determine how far from the projector each side of the field will be.
-mffs.guide.modules.deflector.3=The Distrance upgrade determines how far from the projector the centre of the field will be.
+mffs.guide.modules.deflector.3=The Distance upgrade determines how far from the projector the centre of the field will be.
 
 mffs.guide.modules.wall=Wall
 mffs.guide.modules.wall.1=This Projector module allows you to project 4 walls in front of the projector.
@@ -202,7 +202,7 @@ mffs.guide.modules.diagWall.3=The Distance upgrade determines how far from the p
 
 mffs.guide.modules.sphere=Sphere
 mffs.guide.modules.sphere.1=This projector module allows you to project a sphere around the projector.
-mffs.guide.modules.sphere.2=The Distance upgrade determines the diameter of the sphere, while the strength upgrade determnes how thick the field will be.
+mffs.guide.modules.sphere.2=The Distance upgrade determines the diameter of the sphere, while the strength upgrade determines how thick the field will be.
 
 mffs.guide.modules.tube=Tube
 mffs.guide.modules.tube.1=This projector module allows you to project a tube around the projector.
@@ -213,7 +213,7 @@ mffs.guide.options.worksWith=This module works with:
 mffs.guide.options.blockBreaker=Block Breaker
 mffs.guide.options.blockBreaker.1=This projector option allows the forcefield to break existing blocks without drops.
 
-mffs.guide.options.camoflage=Camoflage
+mffs.guide.options.camoflage=Camouflage
 mffs.guide.options.camoflage.1=This projector option allows you to place any simple block in the centre slot on the projector. This will make the field look like that block.
 
 
@@ -239,7 +239,7 @@ mffs.guide.options.zap=Touch Damage
 mffs.guide.options.zap.1=This projector option makes the forcefields do damage on touch.
 
 mffs.guide.options.light=Light
-mffs.guide.options.light.1=This projector option makes the forcefields emit light (Not compatible with zap or camoflage options)
+mffs.guide.options.light.1=This projector option makes the forcefields emit light (Not compatible with zap or camouflage options)
 
 
 
@@ -249,7 +249,7 @@ mffs.guide.machines.extractor=Extractor
 mffs.guide.machines.extractor.1=This machine converts power and forcium into Force Energy. It can take Tesla, RF, or IC2. and infuses the power into the forcium.
 mffs.guide.machines.extractor.2=The power can be applied via any of the usual wires. Without a Capacitor attached, it has a relatively small internal buffer, and will stop converting when full. This internal buffer can be increased with the Capacity plugin. The Booster plugin increases the speed of the machine's operation.
 
-mffs.guide.machines.capacitor=Capcitor
+mffs.guide.machines.capacitor=Capacitor
 mffs.guide.machines.capacitor.1=This machine stores, and also allocates Force Energy to machines on it's network. It has a small range, though plugins can be used.
 mffs.guide.machines.capacitor.2=This capacitor can also be used to empty, or fill Force Power Crystals. The capacitor accepts Booster plugin to increase it's range, or Capacity to increase the Force Energy it can store.
 mffs.guide.machines.capacitor.3=The capacitor is the linchpin to a MFFS power network. right click on it with an empty card to create a power link card, which can be used to add any powered, or power producing MFFS machine into the network.
