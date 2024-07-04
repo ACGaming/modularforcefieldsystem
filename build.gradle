@@ -43,10 +43,10 @@ repositories {
         name = "tterrag maven"
         url = "https://maven.tterrag.com"
     }
-    maven {
-    	name = "IC2"
-    	url = "https://maven.ic2.player.to"
-    }
+//    maven {
+//    	name = "IC2"
+//    	url = "https://maven.ic2.player.to"
+//    }
     maven {
         name = "BuildCraft"
         url = "https://mod-buildcraft.com/maven"
@@ -63,9 +63,13 @@ repositories {
         name = "JEI Maven"
         url = "https://dvs1.progwml6.com/files/maven"
     }
-    maven {
-      	name = "Tesla"
-        url = "https://maven.mcmoddev.com"
+//    maven {
+//      	name = "Tesla"
+//        url = "https://maven.mcmoddev.com"
+//    }
+	maven {
+      	name = "ModMaven"
+        url = "https://modmaven.dev"
     }
     maven {
         name = "CurseForge"
